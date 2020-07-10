@@ -37,13 +37,13 @@
                                 :total="featured.count" :per-page="3"></b-pagination>
                         </div>
                     </div>
-                    <div v-if="page === 1" class="columns is-mobile is-multiline">
+                    <div v-if="page === 1" class="columns is-multiline">
                         <div class="column is-4" v-for="(ui, i) in featured.results" :key="i">
                             <ui :value="ui"/>
                         </div>
                     </div>
                     <h4 class="widget_title">NEW DESIGN</h4>
-                    <div class="columns is-mobile is-multiline">
+                    <div class="columns is-multiline">
                         <div class="column is-3" v-for="(ui, i) in response.results" :key="i">
                             <ui :value="ui"/>
                         </div>
@@ -124,9 +124,10 @@
     export default {
         name: "Tag",
         watchQuery: true,
-        async asyncData({$api, params, query}) {
-            let tag = params.tag ? await $api.hash_tag.get(params.tag) : undefined;
+        async asyncData({$api, params, query, store}) {
+            let tag = params.tag ? await $api.hash_tag.get(params.tag) : null;
             let page = query.page ? Number.parseInt(query.page) : 1;
+            await store.commit('config/SET_APP', tag);
             return {
                 page,
                 tag: tag,

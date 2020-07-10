@@ -165,16 +165,4 @@
 </script>
 
 <style lang="scss">
-    .media-show {
-        .image {
-            img {
-                width: auto;
-                margin: 0 auto;
-            }
-        }
-    }
-
-    .clickable {
-        cursor: pointer;
-    }
 </style>

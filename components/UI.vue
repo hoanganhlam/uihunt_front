@@ -25,22 +25,30 @@
 
 <style lang="scss">
     .ui {
+        overflow: hidden;
+
         .card-content {
             position: absolute;
-            bottom: 0;
+            bottom: - 100%;
             left: 0;
             right: 0;
-            padding: 3rem .75rem .75rem;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(84, 130, 135, 1) 100%);
+            padding: .75rem;
+            background: #EEEEEE;
 
             h3 {
                 margin-bottom: .5rem;
-                color: #EEEEEE;
                 font-weight: bold;
             }
 
             a {
-                color: #EEEEEE;
+                color: #333333;
+            }
+        }
+
+        &:hover {
+            .card-content {
+                bottom: 0;
+                transition: .3s;
             }
         }
     }

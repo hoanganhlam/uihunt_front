@@ -57,3 +57,26 @@ body {
 .image.is-1by1 img {
     object-fit: cover;
 }
+
+.media-show {
+    .image {
+        img {
+            width: auto;
+            margin: 0 auto;
+        }
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1023px) {
+    .navbar-end .navbar-item .navbar-item {
+        border: 1px solid #EEEEEE;
+    }
+
+    .modal-content {
+        padding: 0 1rem;
+    }
+}
