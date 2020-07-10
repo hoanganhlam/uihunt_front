@@ -3,6 +3,6 @@ export default function (context) {
         if (e.response.status === 401) {
             await context.$auth.logout()
         }
-    })
+    });
     context.$axios.onRequest(config => {})
 }

@@ -49,26 +49,14 @@ const RestfulRepo = (app, item) => {
 const apis_module = [
     {
         space: 'activity',
-        endpoint: 'follow',
-        name: 'follow'
-    },
-    {
-        space: 'activity',
-        endpoint: 'actions',
-        name: 'activity',
-        callbacks: [
-            {
-                hasId: true,
-                name: 'vote',
-                method: '$post',
-                endpoint: 'vote'
-            }
-        ]
-    },
-    {
-        space: 'activity',
         endpoint: 'config',
         name: 'config',
+        methods: {}
+    },
+    {
+        space: 'general',
+        endpoint: 'hash-tags',
+        name: 'hash_tag',
         methods: {}
     },
     {
@@ -83,53 +71,30 @@ const apis_module = [
         name: 'media',
         methods: {}
     },
+    // New
     {
-        space: 'app',
-        endpoint: 'applications',
-        name: 'application',
-        methods: {}
-    },
-    {
-        space: 'app',
-        endpoint: 'collaborations',
-        name: 'collaboration',
-        methods: {}
-    },
-    {
-        space: 'app',
-        endpoint: 'features',
-        name: 'feature',
-        methods: {}
-    },
-    {
-        space: 'public',
-        endpoint: 'features',
-        name: 'public_feature',
+        space: 'ui',
+        endpoint: 'uis',
+        name: 'ui',
         callbacks: [
             {
                 hasId: true,
-                name: 'feedback_list',
-                method: '$get',
-                endpoint: 'feedback'
-            },
-            {
-                hasId: true,
-                name: 'feedback_post',
+                name: 'vote',
                 method: '$post',
-                endpoint: 'feedback'
-            },
-            {
-                hasId: true,
-                name: 'rate',
-                method: '$post',
-                endpoint: 'rate'
+                endpoint: 'vote'
             }
         ]
     },
     {
+        space: 'ui',
+        endpoint: 'comments',
+        name: 'comment',
+        methods: {}
+    },
+    {
         space: 'public',
-        endpoint: 'applications',
-        name: 'public_application',
+        endpoint: 'uis',
+        name: 'public_ui',
         methods: {}
     },
 ];

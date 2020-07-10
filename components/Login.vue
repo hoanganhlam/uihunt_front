@@ -1,5 +1,5 @@
 <template>
-    <div class="card" style="width: 300px;">
+    <div class="card" style="width: 400px;">
         <section class="card-content">
             <b-field grouped v-show="!loginTemp">
                 <b-field label="First name" expanded>

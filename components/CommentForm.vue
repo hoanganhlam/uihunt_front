@@ -1,7 +1,7 @@
 <template>
-    <article class="media" v-if="feature">
+    <article class="media comment" v-if="ui">
         <figure class="media-left">
-            <user-card only-avatar avatar-size="is-64x64" :value="currentUser"/>
+            <user-card only-avatar avatar-size="is-32x32" :value="currentUser ? currentUser : undefined"/>
         </figure>
         <div class="media-content">
             <div class="field">
@@ -26,9 +26,9 @@
 
 <script>
     export default {
-        name: "Comment",
+        name: "CommentForm",
         props: {
-            feature: {
+            ui: {
                 default: null
             },
             parent: {
@@ -42,15 +42,30 @@
         },
         methods: {
             submit() {
-                this.$api['public_feature']['feedback_post'](this.feature.id, {
+                this.$api['comment'].post({
+                    ui: this.ui.id,
                     content: this.comment,
                     parent: this.parent ? this.parent.id : undefined
+                }).then(res => {
+                    this.$emit('posted');
+                    this.comment = null;
                 })
             }
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    .media.comment .media {
+        padding-top: 0;
+        border-top: 0;
+    }
 
+    .comment {
+        .user {
+            .media-left {
+                margin-right: 0;
+            }
+        }
+    }
 </style>

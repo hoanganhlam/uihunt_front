@@ -7,17 +7,17 @@ export default {
     }),
     mutations: {
         ['SET_USER'](state, user) {
-            state.user = user
-            state.loggedIn = !!user
+            state.user = user;
+            state.loggedIn = !!user;
         },
         ['SET_TOKEN'](state, token) {
-            state.token = token
+            state.token = token;
         }
     },
     actions: {},
     getters: {
         getUser: state => {
-            return state.user
+            return state.user;
         }
     }
 }

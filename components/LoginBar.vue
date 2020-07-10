@@ -14,12 +14,12 @@
             </button>
         </div>
         <div class="grouped" v-else>
-            <button class="button">
+            <div class="button">
                 <user-card avatar-size="is-24x24" :value="currentUser" clickable></user-card>
-            </button>
-            <n-link class="button value" :to="layout === 'private' ? '/' : '/dashboard'">
-                <b-icon size="is-small" :icon="layout === 'private' ? 'home' : 'briefcase-outline'"></b-icon>
-            </n-link>
+            </div>
+            <div class="button is-text" @click="$auth.logout()">
+                <b-icon size="is-small" icon="account-arrow-right-outline"></b-icon>
+            </div>
         </div>
     </div>
 </template>

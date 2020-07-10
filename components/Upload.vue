@@ -33,11 +33,11 @@
                 if (this.multiple) {
                     for (let i = 0; i < data.length; i++) {
                         let res = await this.beforeUpload(data[i]);
-                        results.push(res)
+                        results.push(res);
                     }
                 } else {
                     let res = await this.beforeUpload(data);
-                    results.push(res)
+                    results.push(res);
                 }
                 this.$emit('done', results);
                 this.dropFiles = [];

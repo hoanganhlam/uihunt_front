@@ -1,5 +1,5 @@
 <template>
-    <div class="media user" @click="click">
+    <div v-if="value" class="media user" @click="click">
         <div class="media-left">
             <Avatar
                 icon="shield-account-outline"
@@ -8,7 +8,9 @@
             />
         </div>
         <div class="media-content v-center" v-if="!onlyAvatar">
-            <n-link v-if="clickable" class="value" :to="value.id ? `/profile/${value.username}` : '#'">{{convertName(value)}}</n-link>
+            <n-link v-if="clickable" class="value" :to="value.id ? `/profile/${value.username}` : '#'">
+                {{convertName(value)}}
+            </n-link>
             <span v-else>{{convertName(value)}}</span>
             <div class="field" v-if="username"><small>@{{value.username}}</small></div>
             <slot></slot>
@@ -68,3 +70,12 @@
         }
     }
 </script>
+<style lang="scss">
+    .user {
+        align-items: center;
+
+        .media-content {
+            line-height: 1.2;
+        }
+    }
+</style>

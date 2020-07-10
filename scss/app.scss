@@ -1,0 +1,59 @@
+$body-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+$body-font-size: 14px;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-smooth: auto;
+    -webkit-font-smoothing: auto;
+    font-family: $body-family;
+    font-size: $body-font-size;
+}
+
+.button, .input, .taginput .taginput-container.is-focusable, .textarea, .select select, .file-cta,
+.file-name, .pagination-previous,
+.pagination-next,
+.pagination-link,
+.pagination-ellipsis {
+    font-size: $body-font-size;
+}
+
+:focus {
+    outline: unset;
+}
+
+
+.container {
+    max-width: 1060px;
+
+    &.small {
+        max-width: 500px;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.navbar-item {
+    font-weight: bold;
+}
+
+.widget_title {
+    font-weight: bold;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.box {
+    border-radius: 0;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.image.is-1by1 img {
+    object-fit: cover;
+}
