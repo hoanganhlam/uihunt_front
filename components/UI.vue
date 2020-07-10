@@ -5,6 +5,10 @@
                 <img :src="value.medias[0].sizes['thumb_247_247']" :alt="value.title">
             </n-link>
         </div>
+        <div class="card-content">
+            <h3 class="is-bold">{{value.title}}</h3>
+            <user-card avatar-size="thumb_24_24" :value="value.user"></user-card>
+        </div>
     </div>
 </template>
 
@@ -19,6 +23,25 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    .ui {
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem .75rem .75rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(84, 130, 135, 1) 100%);
 
+            h3 {
+                margin-bottom: .5rem;
+                color: #EEEEEE;
+                font-weight: bold;
+            }
+
+            a {
+                color: #EEEEEE;
+            }
+        }
+    }
 </style>

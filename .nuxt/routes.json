@@ -1,0 +1,61 @@
+[
+  {
+    "name": "inspiration",
+    "path": "/inspiration",
+    "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/inspiration.vue",
+    "chunkName": "pages/inspiration",
+    "_name": "_40f6c3b1"
+  },
+  {
+    "path": "/post",
+    "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/post.vue",
+    "chunkName": "pages/post",
+    "children": [
+      {
+        "name": "post",
+        "path": "",
+        "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/post/index.vue",
+        "chunkName": "pages/post/index",
+        "_name": "_68736aac"
+      },
+      {
+        "name": "post-id",
+        "path": ":id",
+        "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/post/_id.vue",
+        "chunkName": "pages/post/_id",
+        "_name": "_b617afd8"
+      }
+    ],
+    "_name": "_f7e9122e"
+  },
+  {
+    "name": "profile",
+    "path": "/profile",
+    "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/profile.vue",
+    "chunkName": "pages/profile",
+    "children": [
+      {
+        "name": "profile-username",
+        "path": ":username?",
+        "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/profile/_username.vue",
+        "chunkName": "pages/profile/_username",
+        "_name": "_777a0856"
+      }
+    ],
+    "_name": "_2ea35a70"
+  },
+  {
+    "name": "topic",
+    "path": "/topic",
+    "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/topic.vue",
+    "chunkName": "pages/topic",
+    "_name": "_c0716a94"
+  },
+  {
+    "name": "tag",
+    "path": "/:tag?",
+    "component": "/Users/apple/Desktop/OpenSource/uihunt/pages/_tag.vue",
+    "chunkName": "pages/_tag",
+    "_name": "_f1af90b8"
+  }
+]

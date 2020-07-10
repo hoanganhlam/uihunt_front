@@ -88,7 +88,7 @@
                     <div v-if="form.medias.length" class="columns is-multiline" style="margin-top: 1rem">
                         <div class="column is-3" v-for="img in form.medias" :key="img.id">
                             <div class="image">
-                                <img :src="img.sizes['thumb_247x247']" alt="">
+                                <img :src="img.sizes['thumb_247_247']" alt="">
                             </div>
                         </div>
                     </div>
