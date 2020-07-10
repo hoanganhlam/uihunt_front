@@ -1,0 +1,33 @@
+{
+  "name": "uihunt",
+  "version": "1.0.0",
+  "description": "My tiptop Nuxt.js project",
+  "author": "lamha",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "consola": "latest",
+    "cookie-universal-nuxt": "^2.1.4",
+    "cookieparser": "^0.1.0",
+    "cross-env": "^5.2.0",
+    "dotenv": "latest",
+    "express": "^4.16.4",
+    "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
+    "nuxt": "^2.0.0",
+    "nuxt-buefy": "^0.3.2",
+    "sass-loader": "^9.0.2",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
