@@ -12,8 +12,7 @@
                     </h1>
                     <span v-if="tag" class="tag is-medium">Sample design inspire to create the best product!</span>
                     <p class="subtitle" v-if="tag">{{tag.description}}</p>
-                    <p class="subtitle" v-else>Howdy? Dawn is a simple yet powerful Ghost theme with features
-                        including.</p>
+                    <p class="subtitle" v-else>Explore ideas & inspiration for your great products.</p>
                     <div class="buttons" style="justify-content: center">
                         <div class="button is-medium" @click="showCreate = true">
                             <span>Submit</span>

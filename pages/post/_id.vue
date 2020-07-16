@@ -56,6 +56,14 @@
                         <div class="button is-text" @click="updating = !updating">{{updating ? 'Cancel' : 'Update'}}
                         </div>
                     </div>
+                    <div class="buttons" style="justify-content: center;">
+                        <n-link v-if="ui.previous" :to="`/post/${ui.previous.id}`" class="button is-large">
+                            <b-icon icon="chevron-left"></b-icon>
+                        </n-link>
+                        <n-link v-if="ui.next" :to="`/post/${ui.next.id}`" class="button is-large">
+                            <b-icon icon="chevron-right"></b-icon>
+                        </n-link>
+                    </div>
                 </div>
             </div>
         </section>

@@ -3543,12 +3543,12 @@ var FieldData_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var FieldData = (FieldData_component.exports);
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./components/UI.vue?vue&type=template&id=f96742a2&
-var UIvue_type_template_id_f96742a2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.value)?_c('div',{staticClass:"ui card"},[_vm._ssrNode("<div class=\"card-image\">","</div>",[_c('n-link',{staticClass:"image is-1by1",attrs:{"to":("/post/" + (_vm.value.id))}},[_c('img',{attrs:{"src":_vm.value.medias[0].sizes['thumb_247_247'],"alt":_vm.value.title}})])],1),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"card-content\">","</div>",[_vm._ssrNode("<h3 class=\"is-bold\">"+_vm._ssrEscape(_vm._s(_vm.value.title))+"</h3> "),_c('user-card',{attrs:{"avatar-size":"thumb_24_24","value":_vm.value.user}})],2)],2):_vm._e()}
-var UIvue_type_template_id_f96742a2_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./components/UI.vue?vue&type=template&id=72f0770c&
+var UIvue_type_template_id_72f0770c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.value)?_c('div',{staticClass:"ui card"},[(_vm.value.medias && _vm.value.medias.length)?_vm._ssrNode("<div class=\"card-image\">","</div>",[_c('n-link',{staticClass:"image is-1by1",attrs:{"to":("/post/" + (_vm.value.id))}},[_c('img',{attrs:{"src":_vm.value.medias[0].sizes['thumb_247_247'],"alt":_vm.value.title}})])],1):_vm._e(),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"card-content\">","</div>",[_vm._ssrNode("<h3 class=\"is-bold\">"+_vm._ssrEscape(_vm._s(_vm.value.title))+"</h3> "),_c('user-card',{attrs:{"avatar-size":"thumb_24_24","value":_vm.value.user}})],2)],2):_vm._e()}
+var UIvue_type_template_id_72f0770c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./components/UI.vue?vue&type=template&id=f96742a2&
+// CONCATENATED MODULE: ./components/UI.vue?vue&type=template&id=72f0770c&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/UI.vue?vue&type=script&lang=js&
 //
@@ -3590,8 +3590,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var UI_component = Object(componentNormalizer["a" /* default */])(
   components_UIvue_type_script_lang_js_,
-  UIvue_type_template_id_f96742a2_render,
-  UIvue_type_template_id_f96742a2_staticRenderFns,
+  UIvue_type_template_id_72f0770c_render,
+  UIvue_type_template_id_72f0770c_staticRenderFns,
   false,
   UI_injectStyles,
   null,

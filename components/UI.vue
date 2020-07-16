@@ -1,6 +1,6 @@
 <template>
     <div v-if="value" class="ui card">
-        <div class="card-image">
+        <div class="card-image" v-if="value.medias && value.medias.length">
             <n-link class="image is-1by1" :to="`/post/${value.id}`">
                 <img :src="value.medias[0].sizes['thumb_247_247']" :alt="value.title">
             </n-link>
