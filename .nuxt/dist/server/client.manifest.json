@@ -5,7 +5,7 @@
     "../server/index.ssr.html",
     "5.3f69315.js",
     "LICENSES",
-    "app.048c7c4.js",
+    "app.70396b9.js",
     "app.c42bf37.css",
     "commons/app.e850f06.js",
     "manifest.ad7d7a9e.json",
@@ -20,7 +20,7 @@
     "styles.bbc07ea.css",
     "styles.3d92f4d.js",
     "app.c42bf37.css",
-    "app.048c7c4.js"
+    "app.70396b9.js"
   ],
   "async": [
     "5.3f69315.js",
@@ -2038,7 +2038,7 @@
       "5.3f69315.js"
     ],
     "1a3ae26b": [
-      "app.048c7c4.js"
+      "app.70396b9.js"
     ],
     "085a35c4": [
       "commons/app.e850f06.js"
