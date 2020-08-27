@@ -60,8 +60,6 @@ export default async function (context, inject) {
             let user = await getUser();
             await setUser(user);
         }
-        let res = await context.$axios.$get('/general/config/');
-        await context.store.commit('config/SET_CONTENT_TYPE', res["content_type"]);
     };
 
     await init();

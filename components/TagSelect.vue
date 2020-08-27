@@ -4,7 +4,7 @@
             <button class="button is-text" type="button" slot="trigger">
                 <template>
                     <b-icon icon="chevron-right"></b-icon>
-                    <span>{{app ? app.title : 'Select Topic'}}</span>
+                    <span>{{app ? app.term.title : 'Select Topic'}}</span>
                 </template>
             </button>
             <b-dropdown-item custom aria-role="menuitem">
@@ -14,10 +14,10 @@
             </b-dropdown-item>
             <hr class="dropdown-divider">
             <b-dropdown-item  has-link aria-role="menuitem" v-for="app in response.results" :key="app.id">
-                <n-link :to="`/${app.slug}`">
+                <n-link :to="`/${app['term']['slug']}`">
                     <div class="media">
                         <div class="media-content">
-                            <h3>{{app.title}}</h3>
+                            <h3>{{app['term'].title}}</h3>
                         </div>
                     </div>
                 </n-link>
@@ -41,7 +41,7 @@
         },
         methods: {
             async fetch(text) {
-                this.response = await this.$api.hash_tag.list({
+                this.response = await this.$api['taxonomy'].list({
                     page_size: 5,
                     search: text
                 });

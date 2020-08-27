@@ -3,9 +3,9 @@
         <section class="hero">
             <div class="hero-body">
                 <div class="container small">
-                    <h1 class="title">{{ui.title}}</h1>
-                    <p class="subtitle">{{ui.short_description}}</p>
-                    <user-card username :value="ui.user"></user-card>
+                    <h1 class="title">{{ ui.title }}</h1>
+                    <p class="subtitle">{{ ui.short_description }}</p>
+                    <p>credit: <n-link :to="`/profile/${ui.meta.author}`">{{ ui.meta.author }}</n-link></p>
                 </div>
                 <div class="container media-show">
                     <div class="columns">
@@ -29,14 +29,15 @@
                 </div>
                 <div class="container small">
                     <div class="buttons" style="justify-content: center;">
-                        <div class="button is-medium" v-bind:class="{'is-success': ui.is_voted}" @click="vote">
+                        <div class="button is-medium" v-bind:class="{'is-success': ui['vote_object'].is_voted}"
+                             @click="vote">
                             <b-icon icon="heart"></b-icon>
-                            <span>{{ui['vote_count']}}</span>
+                            <span>{{ ui['vote_object'].total }}</span>
                         </div>
-                        <div v-if="ui['options'] && ui['options']['view_count']" class="button is-text">
-                            {{ui['options']['view_count']}} views
+                        <div v-if="ui['meta'] && ui['meta']['view_count']" class="button is-text">
+                            {{ ui['meta']['view_count'] }} views
                         </div>
-                        <a v-if="ui['options'] && ui['options']['source_url']" :href="ui['options']['source_url']"
+                        <a v-if="ui['meta'] && ui['meta']['source_url']" :href="ui['meta']['source_url']"
                            target="_blank" ref="nofollow" class="button is-text is-small">
                             <b-icon size="is-small" icon="link"></b-icon>
                         </a>
@@ -45,15 +46,15 @@
                         <field-data module="hash_tag" v-model="ui.hash_tags" multiple icon="label"/>
                     </b-field>
                     <div v-else class="tags" style="justify-content: center;">
-                        <n-link class="tag is-medium" v-for="tag in ui.hash_tags" :key="tag.id" :to="`/${tag.slug}`">
+                        <n-link class="tag is-medium" v-for="t in ui.terms" :key="t.id" :to="`/${t['term']['slug']}`">
                             <b-icon size="is-small" icon="label"></b-icon>
-                            <span>{{tag.title}}</span>
+                            <span>{{ t['term']['title'] }}</span>
                         </n-link>
                     </div>
                     <div class="buttons" v-if="currentUser && currentUser.username === 'lam'"
                          style="justify-content: center">
                         <div v-if="updating" class="button" @click="submit">Save</div>
-                        <div class="button is-text" @click="updating = !updating">{{updating ? 'Cancel' : 'Update'}}
+                        <div class="button is-text" @click="updating = !updating">{{ updating ? 'Cancel' : 'Update' }}
                         </div>
                     </div>
                     <div class="buttons" style="justify-content: center;">
@@ -75,7 +76,7 @@
                         <div class="control" v-if="commentParent">
                             <div class="button" @click="commentParent = null">
                                 <b-icon size="is-small" icon="window-close"></b-icon>
-                                <span>Replying {{convertName(commentParent.user)}}</span>
+                                <span>Replying {{ convertName(commentParent.user) }}</span>
                             </div>
                         </div>
                     </comment-form>
@@ -100,76 +101,76 @@
 </template>
 
 <script>
-    export default {
-        name: "PostDetail",
-        async asyncData({$api, params}) {
-            let ui = await $api.public_ui.get(params.id);
-            return {
-                ui: ui,
-                response: await $api.comment.list({ui: ui.id})
-            }
-        },
-        data() {
-            return {
-                index: 0,
-                commentParent: null,
-                updating: false
-            }
-        },
-        head() {
-            return {
-                title: this.ui ? this.ui.title : 'UIHunt',
-                meta: [
-                    {
-                        hid: 'description',
-                        name: 'description',
-                        content: this.ui.short_description
-                    }
-                ]
-            }
-        },
-        methods: {
-            vote() {
-                if (this.currentUser) {
-                    this.$api.ui.vote(this.ui.id, {}).then(res => {
-                        this.ui.is_voted = res;
-                        if (res) {
-                            this.ui['vote_count']++;
-                        } else {
-                            this.ui['vote_count']--
-                        }
-                    })
-                } else {
-                    this.$buefy.toast.open({
-                        message: 'Login required!',
-                        type: 'is-warning'
-                    })
+export default {
+    name: "PostDetail",
+    async asyncData({$api, params}) {
+        let ui = await $api['post'].get(params.id, {params: {uid: true}});
+        return {
+            ui: ui,
+            response: await $api['post']['comment'](ui.id)
+        }
+    },
+    data() {
+        return {
+            index: 0,
+            commentParent: null,
+            updating: false
+        }
+    },
+    head() {
+        return {
+            title: this.ui ? this.ui.title : 'UIHunt',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.ui.short_description
                 }
-            },
-            reply(comment) {
-                this.commentParent = comment;
-            },
-            async fetch() {
-                this.response.results = [];
-                this.response = await this.$api.comment.list({
-                    ui: this.ui.id
+            ]
+        }
+    },
+    methods: {
+        vote() {
+            if (this.currentUser) {
+                this.$api.ui.vote(this.ui.id, {}).then(res => {
+                    this.ui.is_voted = res;
+                    if (res) {
+                        this.ui['vote_count']++;
+                    } else {
+                        this.ui['vote_count']--
+                    }
                 })
-            },
-            submit() {
-                this.$api.ui.update(this.ui.id, {
-                    hash_tags: this.ui.hash_tags.map(x => x.id)
+            } else {
+                this.$buefy.toast.open({
+                    message: 'Login required!',
+                    type: 'is-warning'
                 })
             }
         },
-        mounted() {
+        reply(comment) {
+            this.commentParent = comment;
+        },
+        async fetch() {
+            this.response.results = [];
+            this.response = await this.$api.comment.list({
+                ui: this.ui.id
+            })
+        },
+        submit() {
+            this.$api.ui.update(this.ui.id, {
+                hash_tags: this.ui.hash_tags.map(x => x.id)
+            })
+        }
+    },
+    mounted() {
+        this.toTop();
+    },
+    watch: {
+        $route(to, from) {
             this.toTop();
-        },
-        watch: {
-            $route(to, from) {
-                this.toTop();
-            }
         }
     }
+}
 </script>
 
 <style lang="scss">

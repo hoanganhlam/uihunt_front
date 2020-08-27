@@ -7,11 +7,11 @@
                         <img src="https://demo.iveel.co/dawn/content/images/2020/02/icon.png" alt="">
                     </div>
                     <h1>
-                        <span>{{tag ? `${tag.title} - UI design samples` : 'UIHunt'}}</span>
-                        <span class="tag" v-if="page > 1">Page {{page}}</span>
+                        <span>{{ tag ? `${tag['term'].title} - UI design samples` : 'UIHunt' }}</span>
+                        <span class="tag" v-if="page > 1">Page {{ page }}</span>
                     </h1>
                     <span v-if="tag" class="tag is-medium">Sample design inspire to create the best product!</span>
-                    <p class="subtitle" v-if="tag">{{tag.description}}</p>
+                    <p class="subtitle" v-if="tag">{{ tag.description }}</p>
                     <p class="subtitle" v-else>Explore ideas & inspiration for your great products.</p>
                     <div class="buttons" style="justify-content: center">
                         <div class="button is-medium" @click="showCreate = true">
@@ -55,7 +55,7 @@
                             tag="router-link"
                             :href="`?page=${props.page.number}`"
                             :to="`?page=${props.page.number}`">
-                            {{props.page.number}}
+                            {{ props.page.number }}
                         </b-pagination-button>
                         <b-pagination-button
                             slot="previous"
@@ -106,7 +106,7 @@
                                      v-model="form.short_description"></b-input>
                         </b-field>
                         <b-field label="Add some tags" label-position="on-border">
-                            <field-data module="hash_tag" v-model="form.hash_tags" multiple icon="label"/>
+                            <field-data module="taxonomy" v-model="form.terms" multiple icon="label"/>
                         </b-field>
                         <b-field>
                             <button :disabled="!isReady" class="button is-medium is-primary" @click="submit">Submit
@@ -120,84 +120,89 @@
 </template>
 
 <script>
-    export default {
-        name: "Tag",
-        watchQuery: true,
-        async asyncData({$api, params, query, store}) {
-            let tag = params.tag ? await $api.hash_tag.get(params.tag) : null;
-            let page = query.page ? Number.parseInt(query.page) : 1;
-            await store.commit('config/SET_APP', tag);
-            return {
-                page,
-                tag: tag,
-                response: await $api.public_ui.list({hash_tags: tag ? [tag.id] : undefined, page_size: 8, page: page}),
-                featured: await $api.public_ui.list({hash_tags: tag ? [tag.id] : undefined, page_size: 3})
+export default {
+    name: "Tag",
+    watchQuery: true,
+    async asyncData({$api, params, query, store}) {
+        let tag = params.tag ? await $api['taxonomy'].get(params.tag, {
+            params: {
+                taxonomy: 'tag',
+                publication: 5
             }
-        },
-        head() {
-            return {
-                title: this.tag ? `${this.tag.title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
-                meta: [
-                    {
-                        hid: 'description',
-                        name: 'description',
-                        content: 'Bubblask is small application with many features that help you increase productivity by using pomodoro technique.'
-                    }
-                ]
-            }
-        },
-        data() {
-            return {
-                showCreate: false,
-                currentPage: 1,
-                form: {
-                    title: null,
-                    short_description: null,
-                    hash_tags: [],
-                    medias: [],
-                    source_url: null
+        }) : null;
+        let page = query.page ? Number.parseInt(query.page) : 1;
+        await store.commit('config/SET_APP', tag);
+        return {
+            page,
+            tag: tag,
+            response: await $api['post'].list({taxonomies: tag ? [tag['id']] : undefined, page_size: 8, page: page, type: 'post'}),
+            featured: await $api['post'].list({taxonomies: tag ? [tag['id']] : undefined, page_size: 3, type: 'post'})
+        }
+    },
+    head() {
+        return {
+            title: this.tag ? `${this.tag['term'].title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: undefined
                 }
-            }
-        },
-        methods: {
-            handleUpload(files) {
-                this.form.medias = files;
-            },
-            async submit() {
-                let data = this.cleanData(this.form);
-                let res = this.$api.ui.post(data);
-                this.showCreate = false;
-                this.$buefy.toast.open({
-                    message: 'Submit successfully!',
-                    type: 'is-success'
-                })
-            },
-            async fetch(page) {
-                this.currentPage = page;
-                this.featured = await this.$api['public_ui'].list({
-                    hash_tags: this.tag ? [this.tag.id] : undefined,
-                    page_size: 3,
-                    page: page
-                })
-            }
-        },
-        created() {
-            if (this.tag) {
-                this.form.hash_tags.push(this.tag)
-            }
-        },
-        computed: {
-            isReady() {
-                return !!(this.form.title && this.form.title.length && this.form.medias.length);
+            ]
+        }
+    },
+    data() {
+        return {
+            showCreate: false,
+            currentPage: 1,
+            form: {
+                title: null,
+                short_description: null,
+                terms: [],
+                medias: [],
+                source_url: null
             }
         }
+    },
+    methods: {
+        handleUpload(files) {
+            this.form.medias = files;
+        },
+        async submit() {
+            let data = this.cleanData(this.form);
+            let res = this.$api.ui.post(data);
+            this.showCreate = false;
+            this.$buefy.toast.open({
+                message: 'Submit successfully!',
+                type: 'is-success'
+            })
+        },
+        async fetch(page) {
+            this.currentPage = page;
+            this.featured = await this.$api['public_ui'].list({
+                hash_tags: this.tag ? [this.tag.id] : undefined,
+                page_size: 3,
+                page: page
+            })
+        }
+    },
+    created() {
+        if (this.tag) {
+            this.form.terms.push(this.tag)
+        }
+    },
+    computed: {
+        isReady() {
+            return !!(this.form.title && this.form.title.length && this.form.medias.length);
+        }
     }
+}
 </script>
 
 <style lang="scss">
-    .submit-form {
-        .upload .upload-draggable {
-            min-height: 200px;
-        }
+.submit-form {
+    .upload .upload-draggable {
+        min-height: 200px;
     }
+}
 </style>

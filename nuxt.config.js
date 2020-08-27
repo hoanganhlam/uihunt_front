@@ -1,6 +1,12 @@
 require('dotenv').config();
 
 module.exports = {
+    /*
+    ** ENV
+    */
+    env: {
+        PUBLICATION: process.env.PUBLICATION || 5
+    },
     mode: 'universal',
     /*
     ** Headers of the page
@@ -59,7 +65,7 @@ module.exports = {
     ** See https://axios.nuxtjs.org/options
     */
     axios: {
-        baseURL: process.env.API_DOMAIN + '/v1'
+        baseURL: process.env.API_DOMAIN
     },
     /*
     ** Build configuration
@@ -68,7 +74,7 @@ module.exports = {
         /*
         ** You can extend webpack config here
         */
-        extractCSS: true,
+        extractCSS: false,
         optimization: {
             splitChunks: {
                 cacheGroups: {

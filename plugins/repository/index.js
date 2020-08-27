@@ -29,8 +29,8 @@ const RestfulRepo = (app, item) => {
             return await app.$axios.$delete(`/${item.space}/${item.endpoint}/${id}/`)
         }
     };
-    if (item.callbacks) {
-        item.callbacks.forEach(callback => {
+    if (item.methods) {
+        item.methods.forEach(callback => {
             if (callback.hasId) {
                 out[callback.name] = async (id, body) => {
                     return await app.$axios[callback.method](`/${item.space}/${item.endpoint}/${id}/${callback.endpoint}`, body)
@@ -51,52 +51,46 @@ const apis_module = [
         space: 'activity',
         endpoint: 'config',
         name: 'config',
-        methods: {}
+        methods: []
     },
     {
         space: 'general',
         endpoint: 'hash-tags',
         name: 'hash_tag',
-        methods: {}
+        methods: []
     },
     {
         space: 'auth',
         endpoint: 'users',
         name: 'user',
-        methods: {}
+        methods: []
     },
     {
         space: 'media',
         endpoint: 'medias',
         name: 'media',
-        methods: {}
+        methods: []
     },
     // New
     {
-        space: 'ui',
-        endpoint: 'uis',
-        name: 'ui',
-        callbacks: [
+        space: `pub-${process.env.PUBLICATION}`,
+        endpoint: 'posts',
+        name: 'post',
+        methods: [
             {
                 hasId: true,
-                name: 'vote',
-                method: '$post',
-                endpoint: 'vote'
+                endpoint: 'comments',
+                name: 'comment',
+                method: '$get'
             }
         ]
     },
     {
-        space: 'ui',
-        endpoint: 'comments',
-        name: 'comment',
-        methods: {}
-    },
-    {
-        space: 'public',
-        endpoint: 'uis',
-        name: 'public_ui',
-        methods: {}
-    },
+        space: `pub-${process.env.PUBLICATION}`,
+        endpoint: 'taxonomies',
+        name: 'taxonomy',
+        methods: []
+    }
 ];
 
 export default function (app, inject) {
