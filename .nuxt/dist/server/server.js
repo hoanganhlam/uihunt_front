@@ -115,7 +115,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -472,7 +472,7 @@ module.exports = require("axios");
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(26);
+var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
@@ -488,7 +488,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(28);
+var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
@@ -589,59 +589,65 @@ module.exports = require("moment");
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = require("querystring");
+// This file is intentionally left empty for noop aliases
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = require("node-fetch");
+module.exports = require("querystring");
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports) {
 
-module.exports = require("vue-meta");
+module.exports = require("node-fetch");
 
 /***/ }),
 /* 19 */
 /***/ (function(module, exports) {
 
-module.exports = require("lodash");
+module.exports = require("vue-meta");
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports) {
 
-module.exports = require("cookie-universal");
+module.exports = require("lodash");
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = require("defu");
+module.exports = require("cookie-universal");
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports) {
 
-module.exports = require("buefy");
+module.exports = require("defu");
 
 /***/ }),
 /* 23 */
 /***/ (function(module, exports) {
 
-module.exports = require("lodash/debounce");
+module.exports = require("buefy");
 
 /***/ }),
 /* 24 */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash/debounce");
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(45);
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -652,7 +658,7 @@ __webpack_require__.r(__webpack_exports__);
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -665,7 +671,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -676,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -689,19 +695,19 @@ module.exports = exports;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(30);
+var content = __webpack_require__(31);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 __webpack_require__(3).default("797461a0", content, true)
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -714,19 +720,19 @@ module.exports = exports;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(32);
+var content = __webpack_require__(33);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 __webpack_require__(3).default("49d91b13", content, true)
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -739,7 +745,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -771,7 +777,7 @@ __webpack_require__.r(__webpack_exports__);
 });
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -795,12 +801,6 @@ __webpack_require__.r(__webpack_exports__);
   actions: {},
   getters: {}
 });
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-// This file is intentionally left empty for noop aliases
 
 /***/ }),
 /* 36 */
@@ -913,14 +913,14 @@ module.exports = require("cookieparser");
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: external "querystring"
-var external_querystring_ = __webpack_require__(16);
+var external_querystring_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: external "vue"
 var external_vue_ = __webpack_require__(0);
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
 // EXTERNAL MODULE: external "node-fetch"
-var external_node_fetch_ = __webpack_require__(17);
+var external_node_fetch_ = __webpack_require__(18);
 var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_);
 
 // CONCATENATED MODULE: ./.nuxt/middleware.js
@@ -1612,7 +1612,7 @@ async function serverPrefetch() {
 
 });
 // EXTERNAL MODULE: external "vue-meta"
-var external_vue_meta_ = __webpack_require__(18);
+var external_vue_meta_ = __webpack_require__(19);
 var external_vue_meta_default = /*#__PURE__*/__webpack_require__.n(external_vue_meta_);
 
 // EXTERNAL MODULE: external "vue-client-only"
@@ -1923,7 +1923,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(25)
+  var style0 = __webpack_require__(26)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2227,7 +2227,7 @@ var nuxt_loading_render, nuxt_loading_staticRenderFns
 
 function nuxt_loading_injectStyles (context) {
   
-  var style0 = __webpack_require__(27)
+  var style0 = __webpack_require__(28)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2247,10 +2247,10 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
 
 /* harmony default export */ var nuxt_loading = (nuxt_loading_component.exports);
 // EXTERNAL MODULE: ./node_modules/buefy/dist/buefy.css
-var buefy = __webpack_require__(29);
+var buefy = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./scss/app.scss
-var scss_app = __webpack_require__(31);
+var scss_app = __webpack_require__(32);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=70b8d512&
 var defaultvue_type_template_id_70b8d512_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._ssrNode("<header>","</header>",[_vm._ssrNode("<div class=\"container\">","</div>",[_vm._ssrNode("<nav role=\"navigation\" aria-label=\"main navigation\" class=\"navbar header\">","</nav>",[_vm._ssrNode("<div class=\"navbar-brand\">","</div>",[_c('n-link',{staticClass:"navbar-item",attrs:{"to":"/"}},[_vm._v("UIHUNT")]),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"navbar-item\">","</div>",[_c('tag-select')],1),_vm._ssrNode(" <div"+(_vm._ssrClass("navbar-burger clickable",{'is-active': _vm.activeMenu}))+"><span></span> <span></span> <span></span></div>")],2),_vm._ssrNode(" "),_vm._ssrNode("<div"+(_vm._ssrClass("navbar-menu",{'is-active': _vm.activeMenu}))+">","</div>",[_vm._ssrNode("<div class=\"navbar-start\"><a class=\"navbar-item\">Inspiration</a></div> "),_vm._ssrNode("<div class=\"navbar-end\">","</div>",[_vm._ssrNode("<div class=\"navbar-item\">","</div>",[_c('login-bar')],1)])],2)],2)])]),_vm._ssrNode(" "),_vm._ssrNode("<main class=\"main-content\">","</main>",[_c('nuxt')],1)],2)}
@@ -2267,7 +2267,7 @@ var TagSelectvue_type_template_id_3b725ffc_staticRenderFns = []
 // CONCATENATED MODULE: ./components/TagSelect.vue?vue&type=template&id=3b725ffc&
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(19);
+var external_lodash_ = __webpack_require__(20);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TagSelect.vue?vue&type=script&lang=js&
 //
@@ -2617,8 +2617,8 @@ let store_store = {};
   // If store is an exported method = classic mode (deprecated)
   // Enforce store modules
   store_store.modules = store_store.modules || {};
-  resolveStoreModules(__webpack_require__(33), 'auth.js');
-  resolveStoreModules(__webpack_require__(34), 'config.js'); // If the environment supports hot reloading...
+  resolveStoreModules(__webpack_require__(34), 'auth.js');
+  resolveStoreModules(__webpack_require__(35), 'config.js'); // If the environment supports hot reloading...
 })(); // createStore
 
 
@@ -2733,7 +2733,7 @@ function mergeProperty(storeModule, moduleData, property) {
   }
 }
 // EXTERNAL MODULE: ./.nuxt/empty.js
-var _nuxt_empty = __webpack_require__(35);
+var _nuxt_empty = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./.nuxt/nuxt-icons.js
 /* harmony default export */ var nuxt_icons = (async function (ctx, inject) {
@@ -2752,7 +2752,7 @@ var _nuxt_empty = __webpack_require__(35);
   inject('icon', getIcon);
 });
 // EXTERNAL MODULE: external "cookie-universal"
-var external_cookie_universal_ = __webpack_require__(20);
+var external_cookie_universal_ = __webpack_require__(21);
 var external_cookie_universal_default = /*#__PURE__*/__webpack_require__.n(external_cookie_universal_);
 
 // CONCATENATED MODULE: ./.nuxt/cookie-universal-nuxt.js
@@ -2772,7 +2772,7 @@ var external_axios_ = __webpack_require__(5);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: external "defu"
-var external_defu_ = __webpack_require__(21);
+var external_defu_ = __webpack_require__(22);
 var external_defu_default = /*#__PURE__*/__webpack_require__.n(external_defu_);
 
 // CONCATENATED MODULE: ./.nuxt/axios.js
@@ -2963,7 +2963,7 @@ const setupProgress = axios => {
   inject('axios', axios);
 });
 // EXTERNAL MODULE: external "buefy"
-var external_buefy_ = __webpack_require__(22);
+var external_buefy_ = __webpack_require__(23);
 var external_buefy_default = /*#__PURE__*/__webpack_require__.n(external_buefy_);
 
 // CONCATENATED MODULE: ./.nuxt/buefy.js
@@ -3739,7 +3739,7 @@ var FieldDatavue_type_template_id_c24d1ef0_staticRenderFns = []
 // CONCATENATED MODULE: ./components/FieldData.vue?vue&type=template&id=c24d1ef0&
 
 // EXTERNAL MODULE: external "lodash/debounce"
-var debounce_ = __webpack_require__(23);
+var debounce_ = __webpack_require__(24);
 var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce_);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FieldData.vue?vue&type=script&lang=js&
@@ -4337,6 +4337,8 @@ const apis_module = [{
 
  // Source: ./buefy.js (mode: 'all')
 
+ // Source: ./google-analytics.js (mode: 'client')
+
  // Source: ../components (mode: 'all')
 
  // Source: ../plugins/auth (mode: 'all')
@@ -4616,6 +4618,8 @@ async function createApp(ssrContext, config = {}) {
   if (typeof /* Cannot get final name for export "default" in "./.nuxt/buefy.js" (known exports: , known reexports: ) */ undefined === 'function') {
     await /* Cannot get final name for export "default" in "./.nuxt/buefy.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
   }
+
+  if (false) {}
 
   if (typeof /* Cannot get final name for export "default" in "./components/index.js" (known exports: , known reexports: ) */ undefined === 'function') {
     await /* Cannot get final name for export "default" in "./components/index.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
