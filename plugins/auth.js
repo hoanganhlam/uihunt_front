@@ -62,7 +62,7 @@ export default async function (context, inject) {
         }
     };
 
-    await init();
+    // await init();
 
     $auth.login = login;
     $auth.logout = logout;

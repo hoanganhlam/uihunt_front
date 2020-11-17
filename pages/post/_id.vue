@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <div v-if="ui">
         <section class="hero">
             <div class="hero-body">
                 <div class="container small">
                     <h1 class="title">{{ ui.title }}</h1>
                     <p class="subtitle">{{ ui.short_description }}</p>
-                    <p>credit: <n-link :to="`/profile/${ui.meta.author}`">{{ ui.meta.author }}</n-link></p>
+                    <p>credit:
+                        <n-link :to="`/profile/${ui.meta.author}`">{{ ui.meta.author }}</n-link>
+                    </p>
                 </div>
                 <div class="container media-show">
                     <div class="columns">
@@ -29,7 +31,8 @@
                 </div>
                 <div class="container small">
                     <div class="buttons" style="justify-content: center;">
-                        <div class="button is-medium" v-bind:class="{'is-success': ui['vote_object'].is_voted}"
+                        <div v-if="ui['vote_object']" class="button is-medium"
+                             v-bind:class="{'is-success': ui['vote_object'].is_voted}"
                              @click="vote">
                             <b-icon icon="heart"></b-icon>
                             <span>{{ ui['vote_object'].total }}</span>
@@ -58,10 +61,10 @@
                         </div>
                     </div>
                     <div class="buttons" style="justify-content: center;">
-                        <n-link v-if="ui.previous" :to="`/post/${ui.previous.id}`" class="button is-large">
+                        <n-link v-if="ui.previous" :to="`/post/${ui.previous.pid}`" class="button is-large">
                             <b-icon icon="chevron-left"></b-icon>
                         </n-link>
-                        <n-link v-if="ui.next" :to="`/post/${ui.next.id}`" class="button is-large">
+                        <n-link v-if="ui.next" :to="`/post/${ui.next.pid}`" class="button is-large">
                             <b-icon icon="chevron-right"></b-icon>
                         </n-link>
                     </div>
@@ -101,20 +104,30 @@
 </template>
 
 <script>
+import * as schema from "@/helper/schema";
+
 export default {
     name: "PostDetail",
-    async asyncData({$api, params}) {
-        let ui = await $api['post'].get(params.id, {params: {uid: true}});
-        return {
-            ui: ui,
-            response: await $api['post']['comment'](ui.id)
-        }
+    async fetch() {
+        this.ui = await this.$axios.$post(`uihunt.com/posts/${this.$route.params.id}/`, {
+            schema: schema.post_detail
+        }, {
+            params: {
+                force: this.$route.query.force,
+                uid: true
+            }
+        });
     },
     data() {
         return {
+            ui: null,
             index: 0,
             commentParent: null,
-            updating: false
+            updating: false,
+            response: {
+                results: [],
+                count: 0
+            }
         }
     },
     head() {
@@ -124,7 +137,7 @@ export default {
                 {
                     hid: 'description',
                     name: 'description',
-                    content: this.ui.short_description
+                    content: this.ui ? this.ui.description : null
                 }
             ]
         }
@@ -133,11 +146,11 @@ export default {
         vote() {
             if (this.currentUser) {
                 this.$api.ui.vote(this.ui.id, {}).then(res => {
-                    this.ui.is_voted = res;
+                    this.ui["vote_object"].is_voted = res;
                     if (res) {
-                        this.ui['vote_count']++;
+                        this.ui["vote_object"]['vote_count']++;
                     } else {
-                        this.ui['vote_count']--
+                        this.ui["vote_object"]['vote_count']--
                     }
                 })
             } else {
@@ -168,6 +181,9 @@ export default {
     watch: {
         $route(to, from) {
             this.toTop();
+        },
+        "$route.params.id"() {
+            this.$fetch();
         }
     }
 }

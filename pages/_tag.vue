@@ -7,12 +7,14 @@
                         <img src="https://demo.iveel.co/dawn/content/images/2020/02/icon.png" alt="">
                     </div>
                     <h1>
-                        <span>{{ tag ? `${tag['term'].title} - UI design samples` : 'UIHunt' }}</span>
-                        <span class="tag" v-if="page > 1">Page {{ page }}</span>
+                        <span>{{ archive.term.id ? `${archive.term.title} - UI design samples` : 'UIHunt' }}</span>
+                        <span class="tag" v-if="query.page > 1">Page {{ query.page }}</span>
                     </h1>
-                    <span v-if="tag" class="tag is-medium">Sample design inspire to create the best product!</span>
-                    <p class="subtitle" v-if="tag">{{ tag.description }}</p>
-                    <p class="subtitle" v-else>Explore ideas & inspiration for your great products.</p>
+                    <div class="field">
+                        <p class="subtitle" v-if="archive.term.description">{{ archive.term.description }}</p>
+                        <span v-else-if="archive.term.id" class="tag is-medium">Sample design inspire to create the best product!</span>
+                        <p class="subtitle" v-else>Explore ideas & inspiration for your great products.</p>
+                    </div>
                     <div class="buttons" style="justify-content: center">
                         <div class="button is-medium" @click="showCreate = true">
                             <span>Submit</span>
@@ -25,29 +27,23 @@
         <div class="hero">
             <div class="hero-body">
                 <div class="container">
-                    <div v-if="page === 1" class="level">
+                    <div v-if="query.page === 1" class="level">
                         <div class="level-left">
                             <h4 class="widget_title">FEATURED DESIGN</h4>
                         </div>
-                        <div class="level-right">
-                            <b-pagination
-                                :current.sync="currentPage" simple
-                                @change="fetch"
-                                :total="featured.count" :per-page="3"></b-pagination>
-                        </div>
                     </div>
-                    <div v-if="page === 1" class="columns is-multiline">
-                        <div class="column is-4" v-for="(ui, i) in featured.results" :key="i">
+                    <div v-if="query.page === 1" class="columns is-multiline">
+                        <div class="column is-4" v-for="(ui, i) in archive.popular.results" :key="i">
                             <ui :value="ui"/>
                         </div>
                     </div>
                     <h4 class="widget_title">NEW DESIGN</h4>
                     <div class="columns is-multiline">
-                        <div class="column is-3" v-for="(ui, i) in response.results" :key="i">
+                        <div class="column is-3" v-for="(ui, i) in archive.newest.results" :key="i">
                             <ui :value="ui"/>
                         </div>
                     </div>
-                    <b-pagination :total="response.count" :per-page="8" :current.sync="page">
+                    <b-pagination :total="archive.newest.count" :per-page="query.page_size" :current.sync="query.page">
                         <b-pagination-button
                             slot-scope="props"
                             :page="props.page"
@@ -120,37 +116,11 @@
 </template>
 
 <script>
+import * as schema from "@/helper/schema";
+
 export default {
     name: "Tag",
     watchQuery: true,
-    async asyncData({$api, params, query, store}) {
-        let tag = params.tag ? await $api['taxonomy'].get(params.tag, {
-            params: {
-                taxonomy: 'tag',
-                publication: 5
-            }
-        }) : null;
-        let page = query.page ? Number.parseInt(query.page) : 1;
-        await store.commit('config/SET_APP', tag);
-        return {
-            page,
-            tag: tag,
-            response: await $api['post'].list({taxonomies: tag ? [tag['id']] : undefined, page_size: 8, page: page, type: 'post'}),
-            featured: await $api['post'].list({taxonomies: tag ? [tag['id']] : undefined, page_size: 3, type: 'post'})
-        }
-    },
-    head() {
-        return {
-            title: this.tag ? `${this.tag['term'].title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
-            meta: [
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: undefined
-                }
-            ]
-        }
-    },
     data() {
         return {
             showCreate: false,
@@ -161,7 +131,73 @@ export default {
                 terms: [],
                 medias: [],
                 source_url: null
+            },
+            archive: {
+                term: {},
+                newest: {
+                    results: [],
+                    count: 0
+                },
+                popular: {
+                    results: [],
+                    count: 0
+                },
+                terms: []
+            },
+            query: {
+                page_size: 12,
+                page: 1,
+                show_cms: true,
+                order: "newest",
+                post_type: "post",
+                full: true,
+                term: null
+            },
+        }
+    },
+    async fetch() {
+        this.query.page = this.$route.query.page ? Number.parseInt(this.$route.query.page) : 1;
+        if (this.$route.params.tag) {
+            this.query.term = this.$route.params.tag
+        }
+        this.archive = await this.$axios.$post(`uihunt.com/posts/`, {
+            param: this.query,
+            schema: [
+                "term",
+                "terms",
+                {
+                    "popular": [
+                        {
+                            "results": schema.post_list
+                        },
+                        "count"
+                    ]
+                },
+                {
+                    "newest": [
+                        {
+                            "results": schema.post_list
+                        },
+                        "count"
+                    ]
+                }
+            ]
+        }, {
+            params: {
+                force: this.$route.query.force
             }
+        });
+    },
+    head() {
+        return {
+            title: this.archive.term.id ? `${this.archive.term.title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.archive.term.id ? this.archive.term.description : 'Inspire to the creator to make an awesome product'
+                }
+            ]
         }
     },
     methods: {
@@ -170,19 +206,11 @@ export default {
         },
         async submit() {
             let data = this.cleanData(this.form);
-            let res = this.$api.ui.post(data);
+            this.$api.ui.post(data);
             this.showCreate = false;
             this.$buefy.toast.open({
                 message: 'Submit successfully!',
                 type: 'is-success'
-            })
-        },
-        async fetch(page) {
-            this.currentPage = page;
-            this.featured = await this.$api['public_ui'].list({
-                hash_tags: this.tag ? [this.tag.id] : undefined,
-                page_size: 3,
-                page: page
             })
         }
     },
@@ -194,6 +222,14 @@ export default {
     computed: {
         isReady() {
             return !!(this.form.title && this.form.title.length && this.form.medias.length);
+        }
+    },
+    watch: {
+        "$route.query.page"() {
+            this.$fetch();
+        },
+        "$route.params.tag"() {
+            this.$fetch();
         }
     }
 }

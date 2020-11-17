@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -17,12 +18,12 @@ import nuxt_plugin_nuxticons_68c6c0c3 from 'nuxt_plugin_nuxticons_68c6c0c3' // S
 import nuxt_plugin_cookieuniversalnuxt_79f41d4d from 'nuxt_plugin_cookieuniversalnuxt_79f41d4d' // Source: ./cookie-universal-nuxt.js (mode: 'all')
 import nuxt_plugin_axios_f1a730b6 from 'nuxt_plugin_axios_f1a730b6' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_buefy_490b66f6 from 'nuxt_plugin_buefy_490b66f6' // Source: ./buefy.js (mode: 'all')
-import nuxt_plugin_googleanalytics_48242761 from 'nuxt_plugin_googleanalytics_48242761' // Source: ./google-analytics.js (mode: 'client')
 import nuxt_plugin_components_1e5e118a from 'nuxt_plugin_components_1e5e118a' // Source: ../components (mode: 'all')
 import nuxt_plugin_auth_92710cc8 from 'nuxt_plugin_auth_92710cc8' // Source: ../plugins/auth (mode: 'all')
 import nuxt_plugin_axios_2228ef02 from 'nuxt_plugin_axios_2228ef02' // Source: ../plugins/axios (mode: 'all')
 import nuxt_plugin_mixins_36a27306 from 'nuxt_plugin_mixins_36a27306' // Source: ../plugins/mixins (mode: 'all')
 import nuxt_plugin_repository_02bac980 from 'nuxt_plugin_repository_02bac980' // Source: ../plugins/repository (mode: 'all')
+import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plugins/ga.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -49,9 +50,23 @@ Vue.component('NChild', NuxtChild)
 // Component: <Nuxt>
 Vue.component(Nuxt.name, Nuxt)
 
+Object.defineProperty(Vue.prototype, '$nuxt', {
+  get() {
+    return this.$root.$options.$nuxt
+  },
+  configurable: true
+})
+
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+
+const originalRegisterModule = Vuex.Store.prototype.registerModule
+const baseStoreOptions = { preserveState: process.client }
+
+function registerModule (path, rawModule, options = {}) {
+  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+}
 
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext)
@@ -61,8 +76,7 @@ async function createApp(ssrContext, config = {}) {
   store.$router = router
 
   // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
-  const registerModule = store.registerModule
-  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
+  store.registerModule = registerModule
 
   // Create Root instance
 
@@ -218,10 +232,6 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_buefy_490b66f6(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_googleanalytics_48242761 === 'function') {
-    await nuxt_plugin_googleanalytics_48242761(app.context, inject)
-  }
-
   if (typeof nuxt_plugin_components_1e5e118a === 'function') {
     await nuxt_plugin_components_1e5e118a(app.context, inject)
   }
@@ -242,6 +252,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_repository_02bac980(app.context, inject)
   }
 
+  if (process.client && typeof nuxt_plugin_ga_fb0a2534 === 'function') {
+    await nuxt_plugin_ga_fb0a2534(app.context, inject)
+  }
+
   // Lock enablePreview in context
   if (process.static && process.client) {
     app.context.enablePreview = function () {
@@ -252,9 +266,13 @@ async function createApp(ssrContext, config = {}) {
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {
     await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, () => {
+      router.push(ssrContext.url, resolve, (err) => {
+        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+        if (!err._isRouter) return reject(err)
+        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+
         // navigated to a different route in router guard
-        const unregister = router.afterEach(async (to, from, next) => {
+        const unregister = router.afterEach(async (to, from) => {
           ssrContext.url = to.fullPath
           app.context.route = await getRouteData(to)
           app.context.params = to.params || {}

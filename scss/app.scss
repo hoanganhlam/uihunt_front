@@ -26,10 +26,10 @@ body {
 
 
 .container {
-    max-width: 1060px;
+    max-width: 1060px!important;;
 
     &.small {
-        max-width: 500px;
+        max-width: 500px!important;
     }
 
     &:not(:last-child) {

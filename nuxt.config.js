@@ -42,13 +42,12 @@ module.exports = {
         '@/plugins/axios',
         '@/plugins/mixins',
         {src: '~/plugins/repository'},
+        { src: '~plugins/ga.js', mode: 'client' }
     ],
     /*
     ** Nuxt.js dev-modules
     */
-    buildModules: [
-        '@nuxtjs/google-analytics'
-    ],
+    buildModules: [],
     /*
     ** Nuxt.js modules
     */
@@ -76,7 +75,7 @@ module.exports = {
         /*
         ** You can extend webpack config here
         */
-        extractCSS: false,
+        extractCSS: process.env.NODE_ENV === 'production',
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -97,8 +96,5 @@ module.exports = {
             productionTip: false,
             devtools: true
         }
-    },
-    googleAnalytics: {
-        id: 'G-6VDFPQ8FWZ'
     }
 };

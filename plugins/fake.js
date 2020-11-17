@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 import Autocomplete from 'buefy/src/components/autocomplete/Autocomplete';
 import Button from 'buefy/src/components/button/Button';
@@ -31,6 +31,7 @@ import Notification from 'buefy/src/components/notification/Notification'
 import NotificationNotice from 'buefy/src/components/notification/NotificationNotice'
 import Numberinput from 'buefy/src/components/numberinput/Numberinput'
 import Pagination from 'buefy/src/components/pagination/Pagination'
+import PaginationButton from 'buefy/src/components/pagination/Pagination'
 import Progress from 'buefy/src/components/progress/Progress'
 import Radio from 'buefy/src/components/radio/Radio'
 import RadioButton from 'buefy/src/components/radio/RadioButton'
@@ -87,6 +88,7 @@ Vue.component('b-notification', Notification);
 Vue.component('b-notification-notice', NotificationNotice);
 Vue.component('b-numberinput', Numberinput);
 Vue.component('b-pagination', Pagination);
+Vue.component('b-pagination-button', PaginationButton);
 Vue.component('b-progress', Progress);
 Vue.component('b-radio', Radio);
 Vue.component('b-radio-button', RadioButton);
