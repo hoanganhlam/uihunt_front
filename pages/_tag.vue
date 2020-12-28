@@ -7,12 +7,12 @@
                         <img src="https://demo.iveel.co/dawn/content/images/2020/02/icon.png" alt="">
                     </div>
                     <h1>
-                        <span>{{ archive.term.id ? `${archive.term.title} - UI design samples` : 'UIHunt' }}</span>
+                        <span>{{ archive.term && archive.term.id ? `${archive.term.title} - UI design samples` : 'UIHunt' }}</span>
                         <span class="tag" v-if="query.page > 1">Page {{ query.page }}</span>
                     </h1>
                     <div class="field">
-                        <p class="subtitle" v-if="archive.term.description">{{ archive.term.description }}</p>
-                        <span v-else-if="archive.term.id" class="tag is-medium">Sample design inspire to create the best product!</span>
+                        <p class="subtitle" v-if="archive.term && archive.term.description">{{ archive.term.description }}</p>
+                        <span v-else-if="archive.term && archive.term.id" class="tag is-medium">Sample design inspire to create the best product!</span>
                         <p class="subtitle" v-else>Explore ideas & inspiration for your great products.</p>
                     </div>
                     <div class="buttons" style="justify-content: center">
@@ -151,7 +151,7 @@ export default {
                 order: "newest",
                 post_type: "post",
                 full: true,
-                term: null
+                terms: {}
             },
         }
     },
@@ -190,12 +190,12 @@ export default {
     },
     head() {
         return {
-            title: this.archive.term.id ? `${this.archive.term.title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
+            title: this.archive.term && this.archive.term.id ? `${this.archive.term.title} Sample UI` : 'UIHunt - Inspire to the creator to make an awesome product',
             meta: [
                 {
                     hid: 'description',
                     name: 'description',
-                    content: this.archive.term.id ? this.archive.term.description : 'Inspire to the creator to make an awesome product'
+                    content: this.archive.term && this.archive.term.id ? this.archive.term.description : 'Inspire to the creator to make an awesome product'
                 }
             ]
         }

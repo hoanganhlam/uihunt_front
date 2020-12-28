@@ -150,7 +150,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"PUBLICATION":"5","BASE_URL":"https://uihunt.com","API_DOMAIN":"https://cms.fournalist.com/v1"}
+      env: {"PUBLICATION":"5","BASE_URL":"https://uihunt.com","API_DOMAIN":"https://cms.fournalist.com/v1","NODE_ENV":"production"}
     }
     // Only set once
     if (!process.static && context.req) {

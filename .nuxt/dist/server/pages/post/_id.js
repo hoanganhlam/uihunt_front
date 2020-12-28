@@ -1,7 +1,7 @@
 exports.ids = [4];
 exports.modules = {
 
-/***/ 46:
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36,7 +36,7 @@ const post_list = ["id", "pid", "title", "slug", "created", {
 
 /***/ }),
 
-/***/ 53:
+/***/ 42:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51,7 +51,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./pages/post/_id.vue?vue&type=template&id=36a869bb&
 
 // EXTERNAL MODULE: ./helper/schema.js
-var schema = __webpack_require__(46);
+var schema = __webpack_require__(36);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/post/_id.vue?vue&type=script&lang=js&
 //
